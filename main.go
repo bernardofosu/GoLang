@@ -272,32 +272,53 @@
 // 	fmt.Println("Body:", string(body))
 // }
 
+// package main
+
+// import (
+// 	"fmt"
+// )
+
+// // Define a struct similar to mongo's ClientOptions
+// type ClientOptions struct {
+// 	URI string
+// }
+
+// // Define a function like options.Client() that returns *ClientOptions
+// func NewClientOptions() *ClientOptions {
+// 	return &ClientOptions{}
+// }
+
+// // Define a method on *ClientOptions that sets the URI
+// func (co *ClientOptions) ApplyURI(uri string) *ClientOptions {
+// 	co.URI = uri
+// 	return co
+// }
+
+// func main() {
+// 	// Call function + method (just like options.Client().ApplyURI(...))
+// 	clientOptions := NewClientOptions().ApplyURI("mongodb://localhost:27017")
+
+// 	// Print the result
+// 	fmt.Println("Mongo URI:", clientOptions.URI)
+// }
+
 package main
 
 import (
 	"fmt"
 )
 
-// Define a struct similar to mongo's ClientOptions
-type ClientOptions struct {
-	URI string
-}
-
-// Define a function like options.Client() that returns *ClientOptions
-func NewClientOptions() *ClientOptions {
-	return &ClientOptions{}
-}
-
-// Define a method on *ClientOptions that sets the URI
-func (co *ClientOptions) ApplyURI(uri string) *ClientOptions {
-	co.URI = uri
-	return co
+func updateAge(agePtr *int) {
+	*agePtr = 99 // 👈 attempt to update a copy
 }
 
 func main() {
-	// Call function + method (just like options.Client().ApplyURI(...))
-	clientOptions := NewClientOptions().ApplyURI("mongodb://localhost:27017")
+	var age int
+	fmt.Println("Enter your age:")
 
-	// Print the result
-	fmt.Println("Mongo URI:", clientOptions.URI)
+	fmt.Scanln(&age)
+	fmt.Println("You are", age, "years old")
+
+	updateAge(&age) // 👈 Passing value, not pointer
+	fmt.Println("You are now", age, "years old after update")
 }
