@@ -301,24 +301,38 @@
 // 	// Print the result
 // 	fmt.Println("Mongo URI:", clientOptions.URI)
 // }
+//
+// package main
+
+// import (
+// 	"fmt"
+// )
+
+// func updateAge(agePtr *int) {
+// 	*agePtr = 99 // 👈 attempt to update a copy
+// }
+
+// func main() {
+// 	var age int
+// 	fmt.Println("Enter your age:")
+
+// 	fmt.Scanln(&age)
+// 	fmt.Println("You are", age, "years old")
+
+// 	updateAge(&age) // 👈 Passing value, not pointer
+// 	fmt.Println("You are now", age, "years old after update")
+// }
 
 package main
 
-import (
-	"fmt"
-)
-
-func updateAge(agePtr *int) {
-	*agePtr = 99 // 👈 attempt to update a copy
-}
-
 func main() {
-	var age int
-	fmt.Println("Enter your age:")
+	s := []int{1, 2, 3}
+	println(len(s)) // len is built-in
+	println(cap(s)) // capacity of slice
 
-	fmt.Scanln(&age)
-	fmt.Println("You are", age, "years old")
+	a := make([]int, 5) // create slice with make
 
-	updateAge(&age) // 👈 Passing value, not pointer
-	fmt.Println("You are now", age, "years old after update")
+	append(a, 10) // append to slice
+
+	panic("Something went wrong") // panic is built-in
 }
